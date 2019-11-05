@@ -4,11 +4,16 @@
 </template>
 
 <script>
+import req from 'api/test.js'
+
 export default {
   data () {
     return {
 
     }
+  },
+  created () {
+    console.log('helloword', req)
   }
 }
 </script>
