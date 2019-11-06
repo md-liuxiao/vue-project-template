@@ -1,5 +1,7 @@
 <template>
   <div>
+    <el-button @click="sendGetReq">发送get请求</el-button>
+    <el-button @click="sendPostReq">发送post请求</el-button>
   </div>
 </template>
 
@@ -12,8 +14,19 @@ export default {
 
     }
   },
-  created () {
-    console.log('helloword', req)
+  methods: {
+    sendGetReq () {
+      req('getData', {AccessToken: '99fd39f0-1140-4848-be53-278f5fa0fc1c'}).then(data => {
+        console.log(data)
+      })
+    },
+    sendPostReq () {
+      req('getPostData', {userName: 'admin', passWord: 'zhzxcs@369'}).then(data => {
+        console.log(data)
+      })
+    }
+  },
+  mounted () {
   }
 }
 </script>
