@@ -7,11 +7,12 @@
 
 <script>
 import req from 'api/test.js'
+import exportFile from '../mixins/exportFile.js'
 
 export default {
+  mixins: [exportFile],
   data () {
     return {
-
     }
   },
   methods: {
@@ -33,5 +34,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-
+.active {
+  color: red;
+}
 </style>
