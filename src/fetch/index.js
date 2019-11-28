@@ -3,7 +3,7 @@ import {throwErr} from './throwErr.js'
 
 const qs = require('qs')
 
-const req = function (url, method, params, requestHeader) {
+const req = function (url, method, params, requestHeader, reqType) {
   let instance = axios.create({
     baseURL: process.env.BASE_API,
     timeout: 60000
@@ -21,7 +21,8 @@ const req = function (url, method, params, requestHeader) {
     method: method,
     params: params,
     data: qs.stringify(params),
-    headers: {}
+    headers: {},
+    responseType: reqType && reqType === 'file' ? 'blob' : ''
   }
 
   let getReg = /get|GET/
@@ -29,10 +30,10 @@ const req = function (url, method, params, requestHeader) {
 
   if (getReg.test(requestConfig.method)) {
     delete requestConfig.data
-    requestConfig['Content-Type'] = 'application/json'
+    requestConfig.headers['Content-Type'] = 'application/json'
   } else if (postReg.test(requestConfig.method)) {
     delete requestConfig.params
-    requestConfig['Content-Type'] = 'application/x-www-form-urlencoded'
+    requestConfig.headers['Content-Type'] = 'application/x-www-form-urlencoded'
   }
 
   // 添加响应拦截器
