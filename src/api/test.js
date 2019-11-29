@@ -6,17 +6,20 @@ const config = {
     method: 'get'
   },
   getPostData: {
-    url: '/dccc/user/login',
+    url: '/exportDemo/test',
     method: 'post'
   },
   portExport: {
     url: '/exportDemo/exportFile',
     method: 'post',
-    type: 'file'
+    fileConfig: {
+      type: 'file',
+      fileName: '测试导出文件'
+    }
   }
 }
 
 const request = function (funcName, requestParam) {
-  return req(config[funcName].url, config[funcName].method, requestParam, {}, config[funcName].type)
+  return req(config[funcName].url, config[funcName].method, requestParam, {}, config[funcName].fileConfig)
 }
 export default request

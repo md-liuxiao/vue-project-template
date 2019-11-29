@@ -3,6 +3,16 @@
     <el-button @click="sendGetReq">发送get请求</el-button>
     <el-button @click="sendPostReq">发送post请求</el-button>
     <el-button @click="postExport">post导出</el-button>
+    <el-button @click="changeStore">修改store</el-button>
+    <ul>
+      <li v-for="(item, index) in fileList" :key="index">
+        <div>{{item.fileId}}</div>
+        <div>{{item.fileName}}</div>
+        <div>{{item.fileLoadTime}}s</div>
+        <div>{{item.fileStatus}}</div>
+        <a :href="item.fileUrl" download="excel.xlsx">{{item.fileName}}</a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -16,7 +26,15 @@ export default {
     return {
     }
   },
+  computed: {
+    fileList () {
+      return this.$store.state.exportFileList
+    }
+  },
   methods: {
+    changeStore () {
+      this.$store.commit('changeCount', 10)
+    },
     postExport () {
       req('portExport', {name: 'tom', age: '10'}).then(data => {
         console.log('data', data)
@@ -28,7 +46,7 @@ export default {
       })
     },
     sendPostReq () {
-      req('getPostData', {userName: 'admin', passWord: 'zhzxcs@369'}).then(data => {
+      req('getPostData', {}).then(data => {
         console.log(data)
       })
     }
