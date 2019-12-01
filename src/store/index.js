@@ -5,9 +5,11 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    // 保存导出记录
     exportFileList: []
   },
   mutations: {
+    // 处理导出记录
     changeExportFileList (state, fileData) {
       let index = state.exportFileList.findIndex(item => {
         return item.fileId === fileData.fileId

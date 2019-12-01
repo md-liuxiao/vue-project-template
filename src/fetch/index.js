@@ -4,6 +4,14 @@ import store from '../store/index.js'
 
 const qs = require('qs')
 
+/**
+ *
+ * @param {String} url 请求路径
+ * @param {String} method 请求方法
+ * @param {Object} params 请求参数
+ * @param {Object} requestHeader 请求头
+ * @param {Object} fileConfig ---> {type, fileName} 导出配置 ---> 导出类型, 文件名称
+ */
 const req = function (url, method, params, requestHeader, fileConfig = {}) {
   let instance = axios.create({
     baseURL: process.env.BASE_API,
@@ -33,6 +41,7 @@ const req = function (url, method, params, requestHeader, fileConfig = {}) {
 
   let timer = null
 
+  // 请求类型为导出时，添加vuex状态管理，定时修改vuex对应记录，请求完成或者请求报错时，停止定时器
   if (fileConfig.type === 'file') {
     fileData = {
       fileId: new Date().getTime(),
