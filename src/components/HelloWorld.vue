@@ -3,40 +3,32 @@
     <el-button @click="sendGetReq">发送get请求</el-button>
     <el-button @click="sendPostReq">发送post请求</el-button>
     <el-button @click="postExport">post导出</el-button>
-    <el-button @click="changeStore">修改store</el-button>
-    <ul>
-      <li v-for="(item, index) in fileList" :key="index">
-        <div>{{item.fileId}}</div>
-        <div>{{item.fileName}}</div>
-        <div>{{item.fileLoadTime}}s</div>
-        <div>{{item.fileStatus}}</div>
-        <a :href="item.fileUrl" download="excel.xlsx">{{item.fileName}}</a>
-      </li>
-    </ul>
+    <export-file-list></export-file-list>
   </div>
 </template>
 
 <script>
 import req from 'api/test.js'
-import exportFile from '../mixins/exportFile.js'
+import ExportFileList from './exportFileList.vue'
 
 export default {
-  mixins: [exportFile],
+  components: {
+    ExportFileList
+  },
   data () {
     return {
     }
   },
   computed: {
-    fileList () {
-      return this.$store.state.exportFileList
-    }
   },
   methods: {
-    changeStore () {
-      this.$store.commit('changeCount', 10)
-    },
     postExport () {
-      req('portExport', {name: 'tom', age: '10'}).then(data => {
+      req('portExport', {
+        AccessToken: '90F7112DBB8D4AD575DA4F7979008386',
+        pkOrg: '',
+        date: '',
+        employeeName: ''
+      }).then(data => {
         console.log('data', data)
       })
     },
@@ -58,7 +50,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.active {
-  color: red;
-}
+
 </style>

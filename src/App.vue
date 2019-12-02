@@ -11,6 +11,8 @@ export default {
 </script>
 
 <style>
+@import './styles/index.css';
+
 #app {
 }
 </style>

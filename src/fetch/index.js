@@ -67,7 +67,7 @@ const req = function (url, method, params, requestHeader, fileConfig = {}) {
     if (response.status === 200) {
       if (fileConfig.type === 'file') {
         fileData.fileStatus = 'success'
-        fileData.fileUrl = window.URL.createObjectURL(new Blob([response]))
+        fileData.fileUrl = window.URL.createObjectURL(new Blob([response.data]))
         store.commit('changeExportFileList', fileData)
       }
 

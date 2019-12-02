@@ -10,11 +10,11 @@ const config = {
     method: 'post'
   },
   portExport: {
-    url: '/exportDemo/exportFile',
+    url: '/api/media/stimulate/exportExcel',
     method: 'post',
     fileConfig: {
       type: 'file',
-      fileName: '测试导出文件'
+      fileName: '销售激励报表'
     }
   }
 }
