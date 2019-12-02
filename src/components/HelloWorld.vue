@@ -10,6 +10,9 @@
 <script>
 import req from 'api/test.js'
 import ExportFileList from './exportFileList.vue'
+import exportFile from '../mixins/exportFile.js'
+import { treeData } from './data.js'
+import { dataFlattening } from '@/utils/index.js'
 
 export default {
   components: {
@@ -44,6 +47,8 @@ export default {
     }
   },
   mounted () {
+    // console.log(dataFlattening(treeData))
+    // console.log(dataFlattening)
   }
 }
 </script>
