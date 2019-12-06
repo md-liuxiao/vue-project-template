@@ -3,27 +3,77 @@
     <el-button @click="sendGetReq">发送get请求</el-button>
     <el-button @click="sendPostReq">发送post请求</el-button>
     <el-button @click="postExport">post导出</el-button>
+    <el-button @click="openDialog">打开dialog</el-button>
     <export-file-list></export-file-list>
+    <i-dialog
+      v-model="dialogVisible"
+      @close="dialogClose"
+      @open="dialogOpen"
+      :toolbar="dialogToolbar">
+
+      <div>测试内容</div>
+
+    </i-dialog>
   </div>
 </template>
 
 <script>
 import req from 'api/test.js'
 import ExportFileList from './exportFileList.vue'
+import IDialog from '@/components/common/i-dialog/index.vue'
 import { treeData, basicArray, objArray } from './data.js'
 import { dataFlattening } from '@/utils/index.js'
 
 export default {
   components: {
-    ExportFileList
+    ExportFileList,
+    IDialog
   },
   data () {
     return {
+      dialogVisible: false,
+      testDisabled: false,
+      dialogToolbar: [
+        {
+          text: '测试按钮1',
+          type: 'success',
+          disabled: () => {
+            return this.testDisabled
+          },
+          loading: () => {
+            return false
+          },
+          func: (done) => {
+            done()
+          }
+        },
+        {
+          text: '测试按钮2',
+          type: 'primary',
+          disabled: () => {
+            return false
+          },
+          loading: () => {
+            return false
+          },
+          func: (done) => {
+          }
+        }
+      ]
     }
   },
   computed: {
   },
   methods: {
+    openDialog () {
+      this.dialogVisible = true
+    },
+    dialogClose () {
+      console.log('关闭dialog')
+    },
+    dialogOpen () {
+      console.log('打开dialog')
+    },
     postExport () {
       req('portExport', {
         AccessToken: '90F7112DBB8D4AD575DA4F7979008386',
