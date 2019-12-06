@@ -11,8 +11,11 @@
       @open="dialogOpen"
       :toolbar="dialogToolbar">
 
-      <div>测试内容</div>
-
+      <el-button round>测试按钮</el-button>
+      <el-input></el-input>
+      <el-select></el-select>
+      <el-date-picker></el-date-picker>
+      <el-input-number></el-input-number>
     </i-dialog>
   </div>
 </template>

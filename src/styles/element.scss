@@ -1,0 +1,22 @@
+/*** 全局覆盖element样式 ***/
+
+/*** 按钮去除圆角 ***/
+.el-button {
+  border-radius: 0;
+}
+
+/*** input去除圆角 ***/
+/deep/ .el-input {
+  .el-input__inner {
+    border-radius: 0;
+  }
+}
+
+/*** 选择器去除圆角 ***/
+/deep/ .el-select {
+  .el-input {
+    .el-input__inner {
+      border-radius: 0;
+    }
+  }
+}
