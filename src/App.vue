@@ -11,8 +11,10 @@ export default {
 </script>
 
 <style>
-@import './styles/index.css';
+@import './styles/global.css';
 
 #app {
+  width: 100%;
+  height: 100%;
 }
 </style>
