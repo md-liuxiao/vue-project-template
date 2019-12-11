@@ -6,7 +6,9 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     // 保存导出记录
-    exportFileList: []
+    exportFileList: [],
+    // 保存项目中所有的字典数据
+    dictDatas: {}
   },
   mutations: {
     // 处理导出记录
@@ -20,6 +22,10 @@ const store = new Vuex.Store({
       } else {
         state.exportFileList.push(fileData)
       }
+    },
+    // 处理字典数据
+    changeDictDatas (state, dictInfo) {
+      state.dictDatas[dictInfo.dictName] = dictInfo.dictData
     }
   }
 })

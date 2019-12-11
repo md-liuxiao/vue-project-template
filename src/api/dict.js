@@ -1,18 +1,6 @@
 import req from 'fetch/index.js'
 
 const config = {
-  portExport: {
-    url: '/api/media/stimulate/exportExcel',
-    method: 'post',
-    fileConfig: {
-      type: 'file',
-      fileName: '销售激励报表'
-    }
-  },
-  getMediaType: {
-    url: '/dicts/DICT_MEDIA_TYPE',
-    method: 'get'
-  },
   getCardType: {
     url: '/dicts/DICT_CARD_TYPE',
     method: 'get'

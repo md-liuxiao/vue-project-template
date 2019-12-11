@@ -1,7 +1,5 @@
 <template>
   <div>
-    <el-button @click="sendGetReq">发送get请求</el-button>
-    <el-button @click="sendPostReq">发送post请求</el-button>
     <el-button @click="postExport">post导出</el-button>
     <el-button @click="openDialog">打开dialog</el-button>
     <export-file-list></export-file-list>
@@ -18,125 +16,10 @@
       <el-input-number></el-input-number>
     </i-dialog>
 
-    <ul>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-      <li>123</li>
-    </ul>
+    <i-table
+      :table="table">
+    </i-table>
+
   </div>
 </template>
 
@@ -146,11 +29,13 @@ import ExportFileList from './exportFileList.vue'
 import IDialog from '@/components/common/i-dialog/index.vue'
 import { treeData, basicArray, objArray } from './data.js'
 import { dataFlattening } from '@/utils/index.js'
+import ITable from '@/components/common/i-table'
 
 export default {
   components: {
     ExportFileList,
-    IDialog
+    IDialog,
+    ITable
   },
   data () {
     return {
@@ -182,7 +67,17 @@ export default {
           func: (done) => {
           }
         }
-      ]
+      ],
+      table: {
+        data: [],
+        columns: [
+          {label: '用户名称', prop: 'user_name'},
+          {label: '用户身高', prop: 'user_height'},
+          {label: '用户编号', prop: 'user_code'},
+          {label: '媒体类型', prop: 'media_type', display: {dict: 'DICT_MEDIA_TYPE'}},
+          {label: '身份类型', prop: 'card_type', display: {dict: 'DICT_CARD_TYPE'}}
+        ]
+      }
     }
   },
   computed: {
@@ -207,18 +102,16 @@ export default {
         console.log('data', data)
       })
     },
-    sendGetReq () {
-      req('getData', {AccessToken: '99fd39f0-1140-4848-be53-278f5fa0fc1c'}).then(data => {
-        console.log(data)
-      })
-    },
-    sendPostReq () {
-      req('getPostData', {}).then(data => {
-        console.log(data)
+    getTableData () {
+      req('getTableData', {}).then(data => {
+        this.table.data = data
       })
     }
   },
+  created () {
+  },
   mounted () {
+    this.getTableData()
   }
 }
 </script>

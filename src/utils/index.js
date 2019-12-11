@@ -1,3 +1,5 @@
+import req from 'fetch/index.js'
+
 // 数据扁平化
 /**
  * 通过递归实现结构化数据扁平化
@@ -16,4 +18,13 @@ export const dataFlattening = (data, childName = 'children') => {
   })
 
   return list
+}
+
+/**
+ * 全局方法，传入字典名称，获取对应字典列表
+ * @param {String} dictName 字典名
+ */
+export const dictFormat = (dictName) => {
+  let url = '/dicts/' + dictName
+  return req(url, 'get')
 }
