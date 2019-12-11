@@ -17,7 +17,8 @@
     </i-dialog>
 
     <i-table
-      :table="table">
+      :table="table"
+      @search="search">
     </i-table>
 
   </div>
@@ -75,7 +76,8 @@ export default {
           {label: '用户身高', prop: 'user_height'},
           {label: '用户编号', prop: 'user_code'},
           {label: '媒体类型', prop: 'media_type', display: {dict: 'DICT_MEDIA_TYPE'}},
-          {label: '身份类型', prop: 'card_type', display: {dict: 'DICT_CARD_TYPE'}}
+          {label: '身份类型', prop: 'card_type', display: {dict: 'DICT_CARD_TYPE'}},
+          {label: '时间', prop: 'time', display: {date: 'YYYY-MM-DD'}}
         ]
       }
     }
@@ -83,6 +85,9 @@ export default {
   computed: {
   },
   methods: {
+    search () {
+      this.getTableData()
+    },
     openDialog () {
       this.dialogVisible = true
     },
@@ -105,13 +110,13 @@ export default {
     getTableData () {
       req('getTableData', {}).then(data => {
         this.table.data = data
+        console.log('3', new Date().getTime())
       })
     }
   },
   created () {
   },
   mounted () {
-    this.getTableData()
   }
 }
 </script>

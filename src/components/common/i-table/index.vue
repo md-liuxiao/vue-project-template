@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: {
     table: {
@@ -47,9 +49,17 @@ export default {
 
     /**
      * 对时间格式的数据进行统一转换处理
-     * @param {String} prop 列名称
+     * @param {String} dateName date格式转换规则
+     * @param {String} value 当前单元格的值
      */
-    dateFormat (prop) {},
+    dateFormat (dateName, value) {
+      if (value) {
+        let date = new Date(value)
+        return moment(date).format(dateName)
+      } else {
+        return value
+      }
+    },
 
     // 单元格转换方法
     formatter (row, column, cellValue, index) {
@@ -59,6 +69,8 @@ export default {
 
       if (currentColumn.display && currentColumn.display.dict) {
         return this.dictFormat(currentColumn.display.dict, cellValue)
+      } else if (currentColumn.display && currentColumn.display.date) {
+        return this.dateFormat(currentColumn.display.date, cellValue)
       } else {
         return cellValue
       }
@@ -80,10 +92,14 @@ export default {
         return this.$d(item)
       })
 
+      console.log('1', new Date().getTime())
       Promise.all(reqList).then(datas => {
         datas.forEach((item, index) => {
           this.$store.commit('changeDictDatas', {dictName: list[index], dictData: item})
         })
+
+        console.log('2', new Date().getTime())
+        this.$emit('search')
       })
     }
   },
