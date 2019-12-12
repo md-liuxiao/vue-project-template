@@ -1,9 +1,30 @@
 <template>
   <div class="i-table-container">
     <el-table
+      ref="table"
       :data="table.data"
       :border="true"
-      :stripe="true">
+      :stripe="true"
+      @selection-change="selectionChange"
+      @row-click="rowClick">
+      <el-table-column v-if="selectType === 'radio'" align="center" width="45">
+        <template slot-scope="scope">
+          <el-radio
+            v-model="currentRow"
+            :label="scope.row"
+            @click.native="choosCurrentRow(scope.row)">
+            <i></i>
+          </el-radio>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        v-if="selectType === 'selection'"
+        type="selection"
+        align="center"
+        width="45">
+      </el-table-column>
+
       <el-table-column
         v-for="(item, index) in table.columns"
         :label="item.label"
@@ -12,6 +33,7 @@
         :formatter="formatter"
         align="center">
       </el-table-column>
+
     </el-table>
   </div>
 </template>
@@ -30,12 +52,58 @@ export default {
           toolbar: []
         }
       }
+    },
+    /**
+     * 表格单选还是多选
+     * @param {String} selection 多选
+     * @param {String} radio 单选
+     */
+    selectType: {
+      type: String,
+      default: ''
     }
   },
   data () {
-    return {}
+    return {
+      // 单选时，保存当前行数据
+      currentRow: {}
+    }
   },
   methods: {
+    /**
+     * 表格单选
+     * @param {Object} currentRow 选中的行数据
+     */
+    choosCurrentRow (currentRow) {
+      this.$emit('selectionRadioChange', currentRow)
+    },
+
+    /**
+     * 表格多选
+     * @param {Array} selection 选中的行数据
+     */
+    selectionChange (selection) {
+      this.$emit('selectionChange', selection)
+    },
+
+    /**
+     * 某一行被点击事件
+     * @param {Object} row 当前行
+     * @param {Object} column 当前行表头
+     * @param {Object} event 事件对象
+     */
+    rowClick (row, column, event) {
+      if (this.selectType === 'selection') {
+        this.$refs.table.toggleRowSelection(row)
+      }
+
+      if (this.selectType === 'radio') {
+        this.currentRow = row
+      }
+
+      this.$emit('rowClick', row, column, event)
+    },
+
     /**
      * 通过请求字典来转换单元格字段
      * @param {String} prop 列名称
@@ -92,13 +160,11 @@ export default {
         return this.$d(item)
       })
 
-      console.log('1', new Date().getTime())
       Promise.all(reqList).then(datas => {
         datas.forEach((item, index) => {
           this.$store.commit('changeDictDatas', {dictName: list[index], dictData: item})
         })
 
-        console.log('2', new Date().getTime())
         this.$emit('search')
       })
     }
@@ -154,6 +220,12 @@ export default {
                 padding: 0;
                 height: 100%;
                 line-height: 35px;
+
+                .el-radio {
+                  .el-radio__label {
+                    padding: 0;
+                  }
+                }
               }
             }
           }

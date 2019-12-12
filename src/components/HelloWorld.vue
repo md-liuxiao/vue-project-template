@@ -18,6 +18,10 @@
 
     <i-table
       :table="table"
+      selectType="radio"
+      @selectionChange="selectionChange"
+      @selectionRadioChange="selectionRadioChange"
+      @rowClick="rowClick"
       @search="search">
     </i-table>
 
@@ -85,6 +89,15 @@ export default {
   computed: {
   },
   methods: {
+    selectionChange (selection) {
+      console.log('selection', selection)
+    },
+    selectionRadioChange (currentRow) {
+      console.log('currentRow', currentRow)
+    },
+    rowClick (row, column, event) {
+      console.log('rowClick', row)
+    },
     search () {
       this.getTableData()
     },
@@ -110,7 +123,6 @@ export default {
     getTableData () {
       req('getTableData', {}).then(data => {
         this.table.data = data
-        console.log('3', new Date().getTime())
       })
     }
   },
