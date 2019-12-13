@@ -19,8 +19,8 @@
           v-for="(item, index) in toolbar"
           :key="index"
           :type="item.type"
-          :disabled="item.disabled()"
-          :loading="item.loading()"
+          :disabled="item.disabled ? item.disabled() : false"
+          :loading="item.loading ? item.loading() : false"
           @click="toolbarBtnClick(item)">
 
           {{item.text}}
@@ -93,11 +93,11 @@ export default {
   },
   methods: {
     done () {
-      this.toolbar.forEach(item => {
-        item.loading = () => {
-          return false
-        }
-      })
+      // this.toolbar.forEach(item => {
+      //   item.loading = () => {
+      //     return false
+      //   }
+      // })
     },
     toolbarBtnClick (btn) {
       if (btn.func) {

@@ -1,5 +1,19 @@
 <template>
   <div class="i-table-container">
+    <div class="i-table-toolbar">
+      <el-button
+        v-for="(item, index) in table.toolbar"
+        :key="index"
+        :type="item.type"
+        :disabled="item.disabled ? item.disabled() : false"
+        :loading="item.loading ? item.loading() : false"
+        @click="toolbarBtnClick(item)">
+
+        {{item.text}}
+
+      </el-button>
+    </div>
+
     <el-table
       ref="table"
       :data="table.data"
@@ -35,6 +49,19 @@
       </el-table-column>
 
     </el-table>
+
+    <div class="i-pagination-container">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[10, 20, 50, 100, 200]"
+        :page-size="table.pageInfo.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="table.pageInfo.total"
+        background>
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -49,7 +76,12 @@ export default {
         return {
           data: [],
           columns: [],
-          toolbar: []
+          toolbar: [],
+          pageInfo: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 0
+          }
         }
       }
     },
@@ -66,10 +98,26 @@ export default {
   data () {
     return {
       // 单选时，保存当前行数据
-      currentRow: {}
+      currentRow: {},
+      // 选择页码时，保存当前页码
+      currentPage: 1
     }
   },
   methods: {
+    /**
+     * 表格按钮点击事件
+     * @param {Object} btn 按钮信息
+     * @param {String} btn.text 按钮文字内容
+     * @param {String} btn.type 按钮类型
+     * @param {Function} btn.loading loading按钮
+     * @param {Function} btn.disabled 禁用按钮
+     * @param {Function} btn.func 点击时触发的方法
+     */
+    toolbarBtnClick (btn) {
+      if (btn.func) {
+        btn.func()
+      }
+    },
     /**
      * 表格单选
      * @param {Object} currentRow 选中的行数据
@@ -167,6 +215,26 @@ export default {
 
         this.$emit('search')
       })
+    },
+
+    /**
+     * 改变每页条数
+     * @param {String} value 当前页展示条数
+     */
+    handleSizeChange (value) {
+      this.$emit('handleSizeChange', value)
+
+      this.$emit('search')
+    },
+
+    /**
+     * 改变页码
+     * @param {String} value 当前页码
+     */
+    handleCurrentChange (value) {
+      this.$emit('handleCurrentChange', value)
+
+      this.$emit('search')
     }
   },
   computed: {
@@ -183,55 +251,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.i-table-container {
-  /deep/ .el-table {
-    // thead
-    .el-table__header-wrapper {
-      .el-table__header {
-        thead {
-          tr {
-            th {
-              padding: 0;
-              height: 35px;
-              color: #333333;
-              background: #F2F2F2;
-
-              .cell {
-                padding: 0;
-                height: 100%;
-                line-height: 35px;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // tbody
-    .el-table__body-wrapper {
-      .el-table__body {
-        tbody {
-          tr {
-            td {
-              padding: 0;
-              height: 35px;
-
-              .cell {
-                padding: 0;
-                height: 100%;
-                line-height: 35px;
-
-                .el-radio {
-                  .el-radio__label {
-                    padding: 0;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+@import "./index.scss";
 </style>

@@ -2,7 +2,7 @@
   <div>
     <el-button @click="postExport">post导出</el-button>
     <el-button @click="openDialog">打开dialog</el-button>
-    <export-file-list></export-file-list>
+    <!-- <export-file-list></export-file-list> -->
     <i-dialog
       v-model="dialogVisible"
       @close="dialogClose"
@@ -75,6 +75,32 @@ export default {
       ],
       table: {
         data: [],
+        toolbar: [
+          {
+            text: '测试表格按钮',
+            type: 'success',
+            // disabled: () => {
+            //   return true
+            // },
+            // loading: () => {
+            //   return false
+            // },
+            func: () => {
+            }
+          },
+          {
+            text: '测试表格按钮2',
+            type: 'primary',
+            // disabled: () => {
+            //   return true
+            // },
+            // loading: () => {
+            //   return false
+            // },
+            func: () => {
+            }
+          }
+        ],
         columns: [
           {label: '用户名称', prop: 'user_name'},
           {label: '用户身高', prop: 'user_height'},
@@ -82,7 +108,12 @@ export default {
           {label: '媒体类型', prop: 'media_type', display: {dict: 'DICT_MEDIA_TYPE'}},
           {label: '身份类型', prop: 'card_type', display: {dict: 'DICT_CARD_TYPE'}},
           {label: '时间', prop: 'time', display: {date: 'YYYY-MM-DD'}}
-        ]
+        ],
+        pageInfo: {
+          pageIndex: 1,
+          pageSize: 10,
+          total: 100
+        }
       }
     }
   },
