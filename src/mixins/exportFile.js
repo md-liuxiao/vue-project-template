@@ -1,5 +1,10 @@
 export default {
   methods: {
+    /**
+     * 使用form方式导出文件
+     * @param {String} requestUrl 导出文件的路径
+     * @param {Object} params 需要传递的参数
+     */
     exportFile (requestUrl, params = {}) {
       let url = process.env.BASE_API + requestUrl
 

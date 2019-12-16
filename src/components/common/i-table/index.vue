@@ -1,5 +1,6 @@
 <template>
   <div class="i-table-container">
+    <!-- 按钮 -->
     <div class="i-table-toolbar">
       <el-button
         v-for="(item, index) in table.toolbar"
@@ -14,6 +15,7 @@
       </el-button>
     </div>
 
+    <!-- 表格 -->
     <el-table
       ref="table"
       :data="table.data"
@@ -50,6 +52,7 @@
 
     </el-table>
 
+    <!-- 分页 -->
     <div class="i-pagination-container">
       <el-pagination
         @size-change="handleSizeChange"
