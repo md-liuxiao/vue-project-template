@@ -1,4 +1,5 @@
 import req from 'fetch/index.js'
+import store from '../store/index.js'
 
 // 数据扁平化
 /**
@@ -25,6 +26,13 @@ export const dataFlattening = (data, childName = 'children') => {
  * @param {String} dictName 字典名
  */
 export const dictFormat = (dictName) => {
-  let url = '/dicts/' + dictName
-  return req(url, 'get')
+  /* eslint-disable */
+  if (Boolean(store.state.dictDatas[dictName])) {
+    return new Promise(resolve => {
+      resolve(store.state.dictDatas[dictName])
+    })
+  } else {
+    let url = '/dicts/' + dictName
+    return req(url, 'get')
+  }
 }

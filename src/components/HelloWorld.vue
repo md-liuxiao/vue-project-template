@@ -2,6 +2,7 @@
   <div>
     <el-button @click="postExport">post导出</el-button>
     <el-button @click="openDialog">打开dialog</el-button>
+    <el-button @click="testVisible = !testVisible">查询</el-button>
     <!-- <export-file-list></export-file-list> -->
     <i-dialog
       v-model="dialogVisible"
@@ -17,6 +18,16 @@
     </i-dialog>
 
     <i-table
+      :table="table"
+      selectType="radio"
+      @selectionChange="selectionChange"
+      @selectionRadioChange="selectionRadioChange"
+      @rowClick="rowClick"
+      @search="search">
+    </i-table>
+
+    <i-table
+      v-if="testVisible"
       :table="table"
       selectType="radio"
       @selectionChange="selectionChange"
@@ -46,6 +57,7 @@ export default {
     return {
       dialogVisible: false,
       testDisabled: false,
+      testVisible: false,
       dialogToolbar: [
         {
           text: '测试按钮1',
