@@ -36,3 +36,43 @@ export const dictFormat = (dictName) => {
     return req(url, 'get')
   }
 }
+
+/**
+ * 防抖
+ * @param {Function} fn 传入执行函数
+ */
+
+export const debounce = (fn) => {
+  let timer = null
+
+  return function (e) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+
+    timer = setTimeout(() => {
+      fn.apply(this, arguments)
+    }, 500)
+  }
+}
+
+/**
+ * 节流
+ * @param {Function} fn 传入执行函数
+ */
+export const throttle = (fn) => {
+  let canRun = true
+
+  return function () {
+    if (!canRun) {
+      return
+    }
+
+    canRun = false
+
+    setTimeout(() => {
+      fn.apply(this, arguments)
+      canRun = true
+    }, 500)
+  }
+}
