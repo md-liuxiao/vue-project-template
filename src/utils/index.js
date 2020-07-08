@@ -76,3 +76,16 @@ export const throttle = (fn) => {
     }, 500)
   }
 }
+
+/**
+ * 对象数组排序
+ * @param {Array} arr  传入排序对象数组
+ * @param {string} ppropertyName  传入对象数组排序根据的key
+ */
+export const sortArr = (arr, ppropertyName) => {
+  let newArr = [...arr]
+  newArr.sort((prev, next) => {
+    return prev[ppropertyName] - next[ppropertyName]
+  })
+  return newArr
+}

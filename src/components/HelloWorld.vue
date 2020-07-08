@@ -44,7 +44,7 @@ import req from 'api/test.js'
 import ExportFileList from './exportFileList.vue'
 import IDialog from '@/components/common/i-dialog/index.vue'
 import { treeData, basicArray, objArray } from './data.js'
-import { dataFlattening } from '@/utils/index.js'
+import { dataFlattening, sortArr } from '@/utils/index.js'
 import ITable from '@/components/common/i-table'
 
 export default {
@@ -55,6 +55,11 @@ export default {
   },
   data () {
     return {
+      objArr: [
+        {name: 'Job', age: '16'},
+        {name: 'Jame', age: '12'},
+        {name: 'Bob', age: '14'}
+      ],
       dialogVisible: false,
       testDisabled: false,
       testVisible: false,
@@ -172,6 +177,7 @@ export default {
   created () {
   },
   mounted () {
+    console.log(sortArr(this.objArr, 'age'))
   }
 }
 </script>
