@@ -22,6 +22,11 @@ export default new Router({
           path: '/test',
           name: 'test',
           component: Test
+        },
+        {
+          path: '/postExport',
+          name: 'postExport',
+          component: () => import('@/pages/export-demo/index.vue')
         }
       ]
     }

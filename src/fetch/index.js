@@ -37,29 +37,6 @@ const req = function (url, method, params, requestHeader, fileConfig = {}) {
   let getReg = /get|GET/
   let postReg = /post|POST/
 
-  let fileData = {}
-
-  let timer = null
-
-  // 请求类型为导出时，添加vuex状态管理，定时修改vuex对应记录，请求完成或者请求报错时，停止定时器
-  if (fileConfig.type === 'file') {
-    fileData = {
-      fileId: new Date().getTime(),
-      fileName: fileConfig.fileName,
-      fileLoadTime: 0,
-      fileStatus: 'downloading',
-      errorInfo: '',
-      fileUrl: null
-    }
-
-    store.commit('changeExportFileList', fileData)
-
-    timer = setInterval(() => {
-      fileData.fileLoadTime += 1
-      store.commit('changeExportFileList', fileData)
-    }, 1000)
-  }
-
   if (getReg.test(requestConfig.method)) {
     delete requestConfig.data
     requestConfig.headers['Content-Type'] = 'application/json'
@@ -70,34 +47,12 @@ const req = function (url, method, params, requestHeader, fileConfig = {}) {
 
   // 添加响应拦截器
   instance.interceptors.response.use(response => {
-    clearInterval(timer)
-    timer = null
-
     if (response.status === 200) {
-      if (fileConfig.type === 'file') {
-        fileData.fileStatus = 'success'
-        fileData.fileUrl = window.URL.createObjectURL(new Blob([response.data]))
-        store.commit('changeExportFileList', fileData)
-      }
-
       return response.data
     } else {
-      if (fileConfig.type === 'file') {
-        fileData.fileStatus = 'error'
-        store.commit('changeExportFileList', fileData)
-      }
-
       throw new Error(throwErr(response))
     }
   }, error => {
-    clearInterval(timer)
-    timer = null
-
-    if (fileConfig.type === 'file') {
-      fileData.fileStatus = 'error'
-      store.commit('changeExportFileList', fileData)
-    }
-
     return Promise.reject(error)
   })
 

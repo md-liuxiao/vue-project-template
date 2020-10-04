@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import {debounce, throttle} from '@/utils/index.js'
+import {commDebounce, commThrottle} from '@/utils/index.js'
 
 export default {
   data () {
     return {}
   },
   mounted () {
-    window.document.body.onscroll = debounce(function (e) {
+    window.document.body.onscroll = commDebounce(function (e) {
       console.log('防抖成功')
     })
 
@@ -24,7 +24,7 @@ export default {
     //   console.log('防抖成功')
     // })
 
-    document.getElementById('test').onclick = throttle(function (e) {
+    document.getElementById('test').onclick = commThrottle(function (e) {
       console.log('节流成功')
     })
   },

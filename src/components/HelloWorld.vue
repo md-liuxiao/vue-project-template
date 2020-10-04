@@ -40,12 +40,11 @@
 </template>
 
 <script>
-// 
 import req from 'api/test.js'
 import ExportFileList from './exportFileList.vue'
 import IDialog from '@/components/common/i-dialog/index.vue'
 import { treeData, basicArray, objArray } from './data.js'
-import { dataFlattening, sortArr } from '@/utils/index.js'
+import { commDataFlattening, commSortArr } from '@/utils/index.js'
 import ITable from '@/components/common/i-table'
 
 export default {
@@ -178,7 +177,7 @@ export default {
   created () {
   },
   mounted () {
-    console.log(sortArr(this.objArr, 'age'))
+    console.log(commSortArr(this.objArr, 'age'))
   }
 }
 </script>

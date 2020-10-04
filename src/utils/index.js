@@ -1,20 +1,20 @@
 import req from 'fetch/index.js'
 import store from '../store/index.js'
 
-// 数据扁平化
 /**
  * 通过递归实现结构化数据扁平化
  * @param {Array} data 需要扁平化的数组
  * @param {String} childName 递归的子节点名称
  */
-export const dataFlattening = (data, childName = 'children') => {
+/* eslint-disable */
+export const commDataFlattening = (data, childName = 'children') => {
   let list = []
 
   data.forEach(item => {
     list.push(item)
 
     if (item[childName] && item[childName].length) {
-      list = list.concat(dataFlattening(item[childName], childName))
+      list = list.concat(commDataFlattening(item[childName], childName))
     }
   })
 
@@ -25,7 +25,8 @@ export const dataFlattening = (data, childName = 'children') => {
  * 全局方法，传入字典名称，获取对应字典列表
  * @param {String} dictName 字典名
  */
-export const dictFormat = (dictName) => {
+/* eslint-disable */
+export const commDictFormat = (dictName) => {
   /* eslint-disable */
   if (Boolean(store.state.dictDatas[dictName])) {
     return new Promise(resolve => {
@@ -41,8 +42,8 @@ export const dictFormat = (dictName) => {
  * 防抖
  * @param {Function} fn 传入执行函数
  */
-
-export const debounce = (fn) => {
+/* eslint-disable */
+export const commDebounce = (fn) => {
   let timer = null
 
   return function (e) {
@@ -60,7 +61,8 @@ export const debounce = (fn) => {
  * 节流
  * @param {Function} fn 传入执行函数
  */
-export const throttle = (fn) => {
+/* eslint-disable */
+export const commThrottle = (fn) => {
   let canRun = true
 
   return function () {
@@ -80,12 +82,43 @@ export const throttle = (fn) => {
 /**
  * 对象数组排序
  * @param {Array} arr  传入排序对象数组
- * @param {string} ppropertyName  传入对象数组排序根据的key
+ * @param {string} propertyName  传入对象数组排序根据的key
  */
-export const sortArr = (arr, ppropertyName) => {
+/* eslint-disable */
+export const commSortArr = (arr, propertyName) => {
   let newArr = [...arr]
+
   newArr.sort((prev, next) => {
-    return prev[ppropertyName] - next[ppropertyName]
+    return prev[propertyName] - next[propertyName]
   })
+
   return newArr
+}
+
+/**
+ * 
+ * @param {String | Object} excelData excel文件数据
+ * @param {String} excelName excel文件名称
+ * @param {String} excelType excel文件类型
+ */
+/* eslint-disable */
+export const commExportExcel = (excelData, excelName, excelType = 'xls') => {
+  let url = null
+  let link = document.createElement('a')
+
+  if (typeof excelData === 'string') {
+    url = window.URL.createObjectURL(new Blob([excelData]))
+  }
+
+  if (typeof excelData === 'object') {
+    url = window.URL.createObjectURL(excelData)
+  }
+
+  link.href = url
+  link.style.display = 'none'
+  link.setAttribute('download', excelName + '.' + excelType)
+
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
 }
