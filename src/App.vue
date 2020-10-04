@@ -12,6 +12,7 @@ export default {
 
 <style>
 @import './styles/global.css';
+@import './styles/element.scss';
 
 #app {
   width: 100%;

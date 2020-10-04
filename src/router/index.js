@@ -27,6 +27,11 @@ export default new Router({
           path: '/postExport',
           name: 'postExport',
           component: () => import('@/pages/export-demo/index.vue')
+        },
+        {
+          path: '/definedButtonDemo',
+          name: 'definedButtonDemo',
+          component: () => import('@/pages/defined-button-demo/index.vue')
         }
       ]
     }

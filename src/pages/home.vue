@@ -53,13 +53,18 @@ export default {
       menuList: [
         {
           menuName: 'demo模块',
-          menuIcon: 'el-icon-location',
+          menuIcon: 'el-icon-menu',
           path: '/demo-module',
           children: [
             {
               menuName: 'post导出demo',
-              menuIcon: 'el-icon-location',
+              menuIcon: 'el-icon-folder',
               path: '/postExport'
+            },
+            {
+              menuName: '自定义按钮demo',
+              menuIcon: 'el-icon-open',
+              path: '/definedButtonDemo'
             }
           ]
         }
@@ -83,7 +88,6 @@ export default {
     handleOpen () {},
     handleClose () {},
     handleSelect (index, path) {
-      console.log(this.$route.path)
       if (this.$route.path === index) {
         return
       }
@@ -121,6 +125,7 @@ export default {
   }
 
   .el-main {
+    position: relative;
     padding: 10px;
   }
 }
