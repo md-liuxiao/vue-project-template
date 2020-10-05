@@ -32,6 +32,11 @@ export default new Router({
           path: '/definedButtonDemo',
           name: 'definedButtonDemo',
           component: () => import('@/pages/defined-button-demo/index.vue')
+        },
+        {
+          path: '/tableDemo',
+          name: 'tableDemo',
+          component: () => import('@/pages/table-demo/index.vue')
         }
       ]
     }

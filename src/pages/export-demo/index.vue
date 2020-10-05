@@ -22,6 +22,10 @@ export default {
         this.loading = false
 
         commExportExcel(data, 'excel', 'xlsx')
+      }).catch(err => {
+        this.loading = false
+
+        throw new Error(err)
       })
     }
   }

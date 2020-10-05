@@ -27,8 +27,7 @@
         <template slot-scope="scope">
           <el-radio
             v-model="currentRow"
-            :label="scope.row"
-            @click.native="choosCurrentRow(scope.row)">
+            :label="scope.row">
             <i></i>
           </el-radio>
         </template>
@@ -49,6 +48,8 @@
         :formatter="formatter"
         align="center">
       </el-table-column>
+
+      <slot></slot>
 
     </el-table>
 
@@ -121,13 +122,6 @@ export default {
         btn.func()
       }
     },
-    /**
-     * 表格单选
-     * @param {Object} currentRow 选中的行数据
-     */
-    choosCurrentRow (currentRow) {
-      this.$emit('selectionRadioChange', currentRow)
-    },
 
     /**
      * 表格多选
@@ -157,13 +151,40 @@ export default {
 
     /**
      * 通过请求字典来转换单元格字段
-     * @param {String} prop 列名称
+     * @param {String} dictName 字典名称
      * @param {String} value 字典value
      */
     dictFormat (dictName, value) {
-      return this.dictDatas[dictName].filter(item => {
+      let resultList = this.dictDatas[dictName].filter(item => {
         return item.value === value
-      })[0].label
+      })
+
+      if (!resultList.length) {
+        console.warn('未匹配到相应的字典值,字典数据为:', resultList, '字典值为:', value)
+
+        return value
+      }
+
+      return resultList[0].label
+    },
+
+    /**
+     * 通过传入固定的字典列表来转换单元格字段
+     * @param {String} dictName 字典列表
+     * @param {String} value 字典value
+     */
+    dictListFormat (dictList, value) {
+      let resultList = dictList.filter(item => {
+        return item.value === value
+      })
+
+      if (!resultList.length) {
+        console.warn('未匹配到相应的字典值,字典数据为:', dictList, '字典值为:', value)
+
+        return value
+      }
+
+      return resultList[0].label
     },
 
     /**
@@ -186,11 +207,13 @@ export default {
         return item.prop === column.property
       })[0]
 
-      if (currentColumn.display && currentColumn.display.dict) {
+      if (currentColumn.display && currentColumn.display.dict) { // 需要调用接口转换字典值
         return this.dictFormat(currentColumn.display.dict, cellValue)
-      } else if (currentColumn.display && currentColumn.display.date) {
+      } else if (currentColumn.display && currentColumn.display.dictList) { // 根据当前行的dictList转换字典值
+        return this.dictListFormat(currentColumn.display.dictList, cellValue)
+      } else if (currentColumn.display && currentColumn.display.date) { // 转换时间
         return this.dateFormat(currentColumn.display.date, cellValue)
-      } else {
+      } else { // 返回原值
         return cellValue
       }
     },

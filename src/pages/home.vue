@@ -65,6 +65,11 @@ export default {
               menuName: '自定义按钮demo',
               menuIcon: 'el-icon-open',
               path: '/definedButtonDemo'
+            },
+            {
+              menuName: '表格公用组件demo',
+              menuIcon: 'el-icon-s-data',
+              path: '/tableDemo'
             }
           ]
         }
