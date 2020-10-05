@@ -39,8 +39,9 @@ export const commDictFormat = (dictName) => {
 /**
  * 防抖
  * @param {Function} fn 传入执行函数
+ * @param {Number} time 定时器的延迟时间
  */
-export const commDebounce = (fn) => {
+export const commDebounce = (fn, time) => {
   let timer = null
 
   return function (e) {
@@ -50,15 +51,16 @@ export const commDebounce = (fn) => {
 
     timer = setTimeout(() => {
       fn.apply(this, arguments)
-    }, 500)
+    }, time)
   }
 }
 
 /**
  * 节流
  * @param {Function} fn 传入执行函数
+ * @param {Number} time 定时器的延迟时间
  */
-export const commThrottle = (fn) => {
+export const commThrottle = (fn, time) => {
   let canRun = true
 
   return function () {
@@ -71,7 +73,7 @@ export const commThrottle = (fn) => {
     setTimeout(() => {
       fn.apply(this, arguments)
       canRun = true
-    }, 500)
+    }, time)
   }
 }
 

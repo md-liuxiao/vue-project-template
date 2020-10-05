@@ -37,6 +37,11 @@ export default new Router({
           path: '/tableDemo',
           name: 'tableDemo',
           component: () => import('@/pages/table-demo/index.vue')
+        },
+        {
+          path: '/debounceThrottle',
+          name: 'debounceThrottle',
+          component: () => import('@/pages/debounce-throttle/index.vue')
         }
       ]
     }

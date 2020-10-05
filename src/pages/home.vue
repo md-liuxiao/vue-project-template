@@ -70,6 +70,11 @@ export default {
               menuName: '表格公用组件demo',
               menuIcon: 'el-icon-s-data',
               path: '/tableDemo'
+            },
+            {
+              menuName: '防抖&节流',
+              menuIcon: 'el-icon-s-data',
+              path: '/debounceThrottle'
             }
           ]
         }
