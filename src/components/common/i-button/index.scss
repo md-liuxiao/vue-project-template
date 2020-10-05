@@ -49,7 +49,6 @@ button.defined-neon-yellow {
   }
 }
 
-
 /* 边框效果-start */
 .draw-border {
   border: 0;
@@ -120,3 +119,98 @@ button.defined-neon-yellow {
     top: 0%;
   }
 }
+
+// 圆角效果
+.filleted-corner {
+  border: 0;
+  border-radius: 10px;
+  background: #2ec4b6;
+  color: white;
+  outline: none;
+  position: relative;
+  transition: border-radius 2s;
+  -webkit-transition: border-radius 2s;
+
+  &:hover {
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+
+// 冰冻效果
+.frozen-green, .frozen-purple {
+  border: 0;
+  border-radius: 20px !important;
+  color: white;
+  outline: none;
+  position: relative;
+}
+
+.frozen-green:before, .frozen-purple:before {
+  content: '';
+  display: block;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.4) 50%);
+  background-size: 210% 100%;
+  background-position: right bottom;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom:0;
+  right:0;
+  left: 0;
+  border-radius: 20px;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+}
+
+.frozen-green {
+  background-image: linear-gradient(to right, #25aae1, #40e495);
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+.frozen-purple {
+  background-image: linear-gradient(to right, #6253e1, #852D91);
+  box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
+
+.frozen-purple:hover:before {
+ background-position: left bottom;
+}
+
+.frozen-green:hover:before {
+ background-position: left bottom;
+}
+
+// 闪亮效果
+.glisten {
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.glisten:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -36px;
+  left: -100px;
+  background: white;
+  width: 50px;
+  height: 125px;
+  opacity: 20%;
+  transform: rotate(-45deg);
+}
+
+.glisten:hover:after {
+  top: -50px;
+  left: 135%;
+  transition: all 600ms cubic-bezier(0.3, 1, 0.2, 1);
+   -webkit-transition: all 600ms cubic-bezier(0.3, 1, 0.2, 1);
+}
+

@@ -1,17 +1,43 @@
 <template>
   <div class="container">
     <el-form :model="formData" label-position="top">
-      <el-form-item label="霓虹效果">
-        <i-button definedType="defined-neon-blue">click</i-button>
-        <i-button definedType="defined-neon-purple">click</i-button>
-        <i-button definedType="defined-neon-yellow">click</i-button>
-      </el-form-item>
-      <el-form-item label="边框效果">
-        <i-button definedType="draw-border">click</i-button>
-      </el-form-item>
-      <el-form-item label="圆形效果">
-        <i-button definedType="circle-btn" icon="el-icon-share">click</i-button>
-      </el-form-item>
+      <el-row>
+        <el-col :span="8">
+          <el-form-item label="边框效果">
+            <i-button definedType="draw-border">click</i-button>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="霓虹效果">
+            <i-button definedType="defined-neon-blue">click</i-button>
+            <i-button definedType="defined-neon-purple">click</i-button>
+            <i-button definedType="defined-neon-yellow">click</i-button>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="圆形效果">
+            <i-button definedType="circle-btn" icon="el-icon-share">click</i-button>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="8">
+          <el-form-item label="圆角效果">
+            <i-button definedType="filleted-corner">click</i-button>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="冰冻效果">
+            <i-button definedType="frozen-green">click-click</i-button>
+            <i-button definedType="frozen-purple">click-click</i-button>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="闪亮效果">
+            <i-button definedType="glisten">click-click-click</i-button>
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
   </div>
 </template>
