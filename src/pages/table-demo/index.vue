@@ -163,6 +163,10 @@ export default {
         return item.uuid === row.uuid
       })
 
+      if (currentRowIndex === 0) {
+        return
+      }
+
       let prevRow = this.table.data[currentRowIndex - 1]
 
       this.table.data.splice(currentRowIndex - 1, 1, row)

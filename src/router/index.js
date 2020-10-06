@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import HelloWorld from '@/pages/helloWorld.vue'
 import Home from '@/pages/home.vue'
-import Test from '@/components/test.vue'
 
 Vue.use(Router)
 
@@ -15,13 +14,8 @@ export default new Router({
       children: [
         {
           path: '/helloWorld',
-          name: 'HelloWorld',
+          name: 'helloWorld',
           component: HelloWorld
-        },
-        {
-          path: '/test',
-          name: 'test',
-          component: Test
         },
         {
           path: '/postExport',

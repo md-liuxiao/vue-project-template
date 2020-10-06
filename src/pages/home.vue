@@ -73,7 +73,7 @@ export default {
             },
             {
               menuName: '防抖&节流',
-              menuIcon: 'el-icon-s-data',
+              menuIcon: 'el-icon-files',
               path: '/debounceThrottle'
             }
           ]
