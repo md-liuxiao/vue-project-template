@@ -75,6 +75,11 @@ export default {
               menuName: '防抖&节流',
               menuIcon: 'el-icon-files',
               path: '/debounceThrottle'
+            },
+            {
+              menuName: '生成二维码导出压缩包',
+              menuIcon: 'el-icon-printer',
+              path: '/createQrCodeExport'
             }
           ]
         }
