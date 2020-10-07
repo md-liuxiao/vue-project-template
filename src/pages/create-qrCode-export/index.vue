@@ -46,6 +46,7 @@ export default {
     })
   },
   methods: {
+    // 生成二维码
     createQrCode (element, url) {
       let qrCode = new QRCode(element, {
         width: 100,
@@ -61,22 +62,29 @@ export default {
     exportQrCode () {
       this.loading = true
 
+      // 创建一个zip对象
       let zip = new JSZip()
+
+      // 在zip压缩包中添加images文件夹
       let img = zip.folder('images')
       let promiseList = []
 
       this.qrList.forEach((item, index) => {
+        // 将查找到的dom使用html2canvas转换为canvas
         promiseList.push(html2canvas(document.querySelectorAll('.qrCode-list li')[index]))
       })
 
       Promise.all(promiseList).then(dataList => {
         dataList.forEach((item, index) => {
+          // 获取base64格式的canvas文件
           let imgData = item.toDataURL('image/png').split('base64,')[1]
 
+          // 生成图片文件
           img.file(this.qrList[index].info + '.png', imgData, {base64: true})
         })
 
         zip.generateAsync({type: 'blob'}).then((content) => {
+          // 下载zip压缩包
           saveAs(content, '统一导出二维码.zip')
 
           this.loading = false
