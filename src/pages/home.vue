@@ -72,14 +72,19 @@ export default {
               path: '/tableDemo'
             },
             {
-              menuName: '防抖&节流',
+              menuName: '防抖&节流demo',
               menuIcon: 'el-icon-files',
               path: '/debounceThrottle'
             },
             {
-              menuName: '生成二维码导出压缩包',
+              menuName: '生成二维码导出压缩包demo',
               menuIcon: 'el-icon-printer',
               path: '/createQrCodeExport'
+            },
+            {
+              menuName: 'DOM转pdf导出demo',
+              menuIcon: 'el-icon-printer',
+              path: '/exportPdfdemo'
             }
           ]
         }
@@ -134,6 +139,10 @@ export default {
       .el-menu-item-group {
         .is-active {
           background: #434A50 !important;
+        }
+
+        /deep/ .el-menu-item-group__title {
+          padding: 0;
         }
       }
     }

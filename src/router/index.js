@@ -35,12 +35,17 @@ export default new Router({
         {
           path: '/debounceThrottle',
           name: 'debounceThrottle',
-          component: () => import('@/pages/debounce-throttle/index.vue')
+          component: () => import('@/pages/debounce-throttle-demo/index.vue')
         },
         {
           path: '/createQrCodeExport',
           name: 'createQrCodeExport',
-          component: () => import('@/pages/create-qrCode-export/index.vue')
+          component: () => import('@/pages/create-qrCode-export-demo/index.vue')
+        },
+        {
+          path: '/exportPdfDemo',
+          name: 'exportPdfDemo',
+          component: () => import('@/pages/export-pdf-demo/index.vue')
         }
       ]
     }
