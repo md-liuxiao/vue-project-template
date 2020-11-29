@@ -102,7 +102,7 @@ export const commSortArr = (arr, propertyName) => {
 }
 
 /**
- * 
+ * excel文件导出
  * @param {String | Object} excelData excel文件数据
  * @param {String} excelName excel文件名称
  * @param {String} excelType excel文件类型
@@ -126,4 +126,29 @@ export const commExportExcel = (excelData, excelName, excelType = 'xls') => {
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
+}
+
+/**
+ * 银行存款格式数据转换(123456789.12 ---> 1,234,567.12)
+ * @param {String | number} depositData 需要转换的数据
+ */
+export const commBankDepositFormat = function (depositData) {
+  let str = typeof depositData === 'number' ? String(depositData) : depositData
+  let spotIndex = str.indexOf('.')
+  let depositArr = spotIndex > 0 ? str.slice(0, spotIndex).split('').reverse() : str.split('').reverse()
+  let suffix = spotIndex > 0 ? str.slice(spotIndex) : ''
+  let eachCount = Math.floor(depositArr.length / 3)
+  let arrLength = depositArr.length
+
+  for (let i = 1; i <= eachCount; i ++) {
+    if (i * 3 < arrLength) {
+      if (i > 1) {
+        depositArr.splice((i * 3) + i - 1, 0, ',')
+      } else {
+        depositArr.splice(i * 3, 0, ',')
+      }
+    }
+  }
+
+  return depositArr.reverse().join('') + suffix
 }
