@@ -46,6 +46,11 @@ export default new Router({
           path: '/exportPdfDemo',
           name: 'exportPdfDemo',
           component: () => import('@/pages/export-pdf-demo/index.vue')
+        },
+        {
+          path: '/2048',
+          name: '2048',
+          component: () => import('@/pages/2048/index.vue')
         }
       ]
     }

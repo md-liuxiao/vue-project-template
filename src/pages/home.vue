@@ -85,6 +85,11 @@ export default {
               menuName: 'DOM转pdf导出demo',
               menuIcon: 'el-icon-printer',
               path: '/exportPdfdemo'
+            },
+            {
+              menuName: '2048-demo',
+              menuIcon: 'el-icon-s-grid',
+              path: '/2048'
             }
           ]
         }
