@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div id="chessboard">
-      <!-- <div class="chessboard-item" v-for="(item, index) in itemCount" :key="index"></div> -->
     </div>
   </div>
 </template>
@@ -16,8 +15,15 @@ export default {
     }
   },
   mounted () {
-    new Chess({
-      el: 'chessboard'
+    this.$nextTick(() => {
+      /* eslint-disable */
+      new Chess({
+        el: '#chessboard',
+        width: 500,
+        height: 500,
+        rows: 5,
+        cols: 5
+      })
     })
   },
   methods: {
@@ -26,7 +32,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .container {
   position: absolute;
   top: 0;
@@ -40,14 +46,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    // width: 560px;
-    // height: 560px;
     border-radius: 20px;
     background: #BCAD9E;
 
     .chessboard-item {
-      width: 100px;
-      height: 100px;
       border-radius: 10px;
       background: #D6CDC4;
       margin-top: 10px;
