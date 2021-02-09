@@ -14,15 +14,13 @@ export default {
   },
   mounted () {
     /* eslint-disable */
-    let test = new Chess({
+    new Chess({
       el: '#chessboard',
       width: 500,
       height: 500,
-      rows: 4,
-      cols: 4
+      rows: 5,
+      cols: 5
     })
-
-    console.log(test)
   },
   methods: {
 
