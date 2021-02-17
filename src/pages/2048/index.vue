@@ -15,11 +15,11 @@ export default {
   mounted () {
     /* eslint-disable */
     new Chess({
-      el: '#chessboard',
+      el: 'chessboard',
       width: 500,
       height: 500,
-      rows: 5,
-      cols: 5
+      rows: 4,
+      cols: 4
     })
   },
   methods: {
