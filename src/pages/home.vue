@@ -90,6 +90,11 @@ export default {
               menuName: '2048-demo',
               menuIcon: 'el-icon-s-grid',
               path: '/2048'
+            },
+            {
+              menuName: '富文本编辑器-demo',
+              menuIcon: 'el-icon-s-grid',
+              path: '/vueQuillEditorDemo'
             }
           ]
         }

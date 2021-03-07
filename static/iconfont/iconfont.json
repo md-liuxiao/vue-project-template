@@ -1,0 +1,16 @@
+{
+  "id": "2397335",
+  "name": "my-vue-template",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "9447886",
+      "name": "表格",
+      "font_class": "biaoge",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    }
+  ]
+}

@@ -13,6 +13,7 @@ export default {
 <style>
 @import './styles/global.css';
 @import './styles/element.scss';
+@import './styles/editor.css';
 
 #app {
   width: 100%;
